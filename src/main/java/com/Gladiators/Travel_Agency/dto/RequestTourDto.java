@@ -1,22 +1,16 @@
-package com.Gladiators.Travel_Agency.model;
+package com.Gladiators.Travel_Agency.dto;
 
-import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
-
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table(name="tour")
-@Builder
-public class Tour {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+@AllArgsConstructor
+public class RequestTourDto {
 
     private String city ;
     private LocalDateTime startDay;
