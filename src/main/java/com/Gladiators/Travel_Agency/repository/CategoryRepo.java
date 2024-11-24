@@ -1,4 +1,7 @@
 package com.Gladiators.Travel_Agency.repository;
 
-public interface CategoryRepo {
+import com.Gladiators.Travel_Agency.model.Category;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface CategoryRepo extends JpaRepository<Category, Long> {
 }
