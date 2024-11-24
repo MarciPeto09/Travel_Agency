@@ -42,9 +42,10 @@ public class TourService {
 
     }
 
-    public  Tour getTourById(Long id)  {
-        return tourRepo.findById(id)
+    public  ResponsTourDto getTourById(Long id)  {
+        Tour tour = tourRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("This tour id does not exist!"));
+        return mapper.mapToResponse(tour);
     }
 
     public void deleteTourById(Long id){
