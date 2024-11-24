@@ -1,18 +1,15 @@
 package com.Gladiators.Travel_Agency.controller;
 
 import com.Gladiators.Travel_Agency.dto.RequestTourDto;
-import com.Gladiators.Travel_Agency.dto.ResponsTourDto;
-import com.Gladiators.Travel_Agency.model.Tour;
+import com.Gladiators.Travel_Agency.dto.ResponseTourDto;
 import com.Gladiators.Travel_Agency.service.TourService;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -25,17 +22,20 @@ public class TourController {
 
 
     @PostMapping("/save")
-    public ResponseEntity<ResponsTourDto> save(@RequestBody RequestTourDto requestTourDto){
+    public ResponseEntity<ResponseTourDto> save(@RequestBody RequestTourDto requestTourDto){
         return new ResponseEntity<>(tourService.save(requestTourDto),HttpStatus.CREATED);
     }
 
 
     @GetMapping("/findAll")
-    public ResponseEntity<List<ResponsTourDto>> findAll(){
+    public ResponseEntity<List<ResponseTourDto>> findAll(){
         return ResponseEntity.ok(tourService.findAll());
+    }
 
 
-
+    @GetMapping("/all")
+    public ResponseEntity<List<ResponseTourDto>> findByCityAndStartDayAndReturnDayAndAdultPriceAndChildPriceAndAdultSeatsNumberAndChildSeatsNumberAndHotel(@RequestParam(required = false)  String city,  @RequestParam(required = false) Double adultPrice, @RequestParam(required = false) Double childPrice, @RequestParam(required = false) Integer adultSeatsNumber, @RequestParam(required = false)Integer childSeatsNumber, @RequestParam(required = false)String hotel) {
+        return ResponseEntity.ok(tourService.findByCityAndStartDayAndReturnDayAndAdultPriceAndChildPriceAndAdultSeatsNumberAndChildSeatsNumberAndHotel(city,  adultPrice, childPrice, adultSeatsNumber, childSeatsNumber, hotel));
     }
 
 }

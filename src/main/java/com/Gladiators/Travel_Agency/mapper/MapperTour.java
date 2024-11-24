@@ -1,7 +1,7 @@
 package com.Gladiators.Travel_Agency.mapper;
 
 import com.Gladiators.Travel_Agency.dto.RequestTourDto;
-import com.Gladiators.Travel_Agency.dto.ResponsTourDto;
+import com.Gladiators.Travel_Agency.dto.ResponseTourDto;
 import com.Gladiators.Travel_Agency.model.Tour;
 import org.springframework.stereotype.Component;
 
@@ -24,8 +24,8 @@ public class MapperTour {
     }
 
 
-    public ResponsTourDto mapToResponse (Tour tour){
-        ResponsTourDto responsTourDto = new ResponsTourDto();
+    public ResponseTourDto mapToResponse (Tour tour){
+        ResponseTourDto responsTourDto = new ResponseTourDto();
         responsTourDto.setId(tour.getId());
         responsTourDto.setCity(tour.getCity());
         responsTourDto.setHotel(tour.getHotel());

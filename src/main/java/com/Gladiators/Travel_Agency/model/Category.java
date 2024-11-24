@@ -3,12 +3,14 @@ package com.Gladiators.Travel_Agency.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="category")
+@Table(name="categories")
 @Builder
 public class Category {
 
@@ -17,4 +19,6 @@ public class Category {
     private Long id;
 
     private Type type;
+
+
 }

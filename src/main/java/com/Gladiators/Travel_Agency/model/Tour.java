@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="tour")
+@Table(name="tours")
 @Builder
 public class Tour {
 
@@ -23,8 +23,10 @@ public class Tour {
     private LocalDateTime returnDay;
     private Double adultPrice;
     private Double childPrice;
-    private int adultSeatsNumber;
-    private int childSeatsNumber;
+    private Integer adultSeatsNumber;
+    private Integer childSeatsNumber;
     private String hotel;
+
+
 
 }

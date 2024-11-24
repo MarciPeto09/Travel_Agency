@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ResponsTourDto {
+public class ResponseTourDto {
 
     private Long id;
     private String city ;

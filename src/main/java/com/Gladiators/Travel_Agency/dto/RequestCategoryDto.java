@@ -14,6 +14,5 @@ public class RequestCategoryDto {
 
     private Type type;
 
-    public String getCity () {
-    }
+
 }
