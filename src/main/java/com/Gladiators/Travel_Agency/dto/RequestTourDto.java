@@ -21,4 +21,5 @@ public class RequestTourDto {
     private int childSeatsNumber;
     private String hotel;
 
+
 }
