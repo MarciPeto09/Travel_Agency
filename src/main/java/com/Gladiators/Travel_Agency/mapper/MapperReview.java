@@ -3,7 +3,9 @@ package com.Gladiators.Travel_Agency.mapper;
 import com.Gladiators.Travel_Agency.dto.RequestReviewDto;
 import com.Gladiators.Travel_Agency.dto.ResponseReviewDto;
 import com.Gladiators.Travel_Agency.model.Review;
+import org.springframework.stereotype.Component;
 
+@Component
 public class MapperReview {
 
     public Review mapToEntity(RequestReviewDto requestReviewDto){
@@ -22,7 +24,9 @@ public class MapperReview {
         responseReviewDto.setData(review.getData());
         responseReviewDto.setId(review.getId());
         responseReviewDto.setDescription(review.getDescription());
-        review.setNumber(review.getNumber());
+        responseReviewDto.setNumber(review.getNumber());
+        responseReviewDto.setTourId(review.getTour().getId());
+
         return responseReviewDto;
     }
 }

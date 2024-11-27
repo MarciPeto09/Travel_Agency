@@ -38,6 +38,11 @@ public class TourController {
         return ResponseEntity.ok(tourService.findByCityAndStartDayAndReturnDayAndAdultPriceAndChildPriceAndAdultSeatsNumberAndChildSeatsNumberAndHotel(city,  adultPrice, childPrice, adultSeatsNumber, childSeatsNumber, hotel));
     }
 
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<ResponseTourDto> update(@RequestBody RequestTourDto requestTourDto, @PathVariable Long id){
+        return ResponseEntity.ok(tourService.update(requestTourDto, id));
+    }
 }
 
 

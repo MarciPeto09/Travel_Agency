@@ -21,8 +21,8 @@ public class ReviewController {
     private ReviewService reviewService;
 
     @PostMapping("/save")
-    public ResponseEntity<ResponseReviewDto> save(@RequestBody RequestTourDto requestTourDto){
-        return new ResponseEntity<>(reviewService.save(new RequestReviewDto()), HttpStatus.CREATED);
+    public ResponseEntity<ResponseReviewDto> save(@RequestBody RequestReviewDto requestReviewDto){
+        return new ResponseEntity<>(reviewService.save(requestReviewDto), HttpStatus.CREATED);
     }
 
 

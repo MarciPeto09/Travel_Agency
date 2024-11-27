@@ -20,4 +20,8 @@ public class Review {
     private LocalDateTime Data;
     private Integer Number;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "tour_Id", nullable = false)
+    Tour tour;
+
 }

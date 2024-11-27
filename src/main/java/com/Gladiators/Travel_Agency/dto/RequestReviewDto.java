@@ -20,5 +20,7 @@ public class RequestReviewDto {
         private LocalDateTime Data;
         private Integer Number;
 
+        private Long tourId;
+
 
     }
