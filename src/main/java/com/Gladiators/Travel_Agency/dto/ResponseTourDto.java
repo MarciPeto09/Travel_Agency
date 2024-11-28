@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -22,4 +23,8 @@ public class ResponseTourDto {
     private int adultSeatsNumber;
     private int childSeatsNumber;
     private String hotel;
+
+    private String categoryName;
+
+    private List<ResponseReviewDto> listOfReview;
 }

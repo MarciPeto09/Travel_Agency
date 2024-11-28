@@ -3,13 +3,14 @@ package com.Gladiators.Travel_Agency.service;
 import com.Gladiators.Travel_Agency.dto.RequestReviewDto;
 import com.Gladiators.Travel_Agency.dto.RequestTourDto;
 import com.Gladiators.Travel_Agency.dto.ResponseReviewDto;
-import com.Gladiators.Travel_Agency.dto.ResponsTourDto;
 import com.Gladiators.Travel_Agency.mapper.MapperReview;
 import com.Gladiators.Travel_Agency.mapper.MapperTour;
 import com.Gladiators.Travel_Agency.model.Review;
 
 import com.Gladiators.Travel_Agency.model.Tour;
 import com.Gladiators.Travel_Agency.repository.ReviewRepo;
+import com.Gladiators.Travel_Agency.repository.TourRepository;
+import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,12 +21,12 @@ import java.util.List;
 
 
 @Service
-@NoArgsConstructor
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class ReviewService {
 
         private ReviewRepo reviewRepoRepo;
         private MapperReview mapper;
+        private TourRepository tourRepository;
 
 
         public List<ResponseReviewDto> findAll(){
@@ -55,9 +56,21 @@ public class ReviewService {
 
 
     public  ResponseReviewDto save(RequestReviewDto requestReviewDto) {
+
+            //convertin the filds from a review dto to a review entity
             Review review = mapper.mapToEntity(requestReviewDto);
-             reviewRepoRepo.save(review);
-             return  mapper.mapToRespons(review);
+            //am searching for a tour on DB based on the id procided on requestDto
+            Tour tour = tourRepository.findById(requestReviewDto.getTourId())
+                    .orElseThrow(() -> new RuntimeException("This tour id does not exist!"));
+
+            //Setting the tour to the review entity
+            review.setTour(tour);
+
+            //Saving the review entity on the Db
+            Review savedReview = reviewRepoRepo.save(review);
+
+            //mapping entity to responseDto and returning the final responseDto
+             return  mapper.mapToRespons(savedReview);
     }
 
 

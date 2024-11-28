@@ -2,11 +2,19 @@ package com.Gladiators.Travel_Agency.mapper;
 
 import com.Gladiators.Travel_Agency.dto.RequestTourDto;
 import com.Gladiators.Travel_Agency.dto.ResponseTourDto;
+import com.Gladiators.Travel_Agency.model.Review;
 import com.Gladiators.Travel_Agency.model.Tour;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.Collections;
+import java.util.List;
+
 @Component
+@AllArgsConstructor
 public class MapperTour {
+
+   private  MapperReview mapperReview;
 
     public Tour mapToEntity(RequestTourDto requestTourDto) {
         Tour tourEntity = Tour.builder()
@@ -25,17 +33,27 @@ public class MapperTour {
 
 
     public ResponseTourDto mapToResponse (Tour tour){
-        ResponseTourDto responsTourDto = new ResponseTourDto();
-        responsTourDto.setId(tour.getId());
-        responsTourDto.setCity(tour.getCity());
-        responsTourDto.setHotel(tour.getHotel());
-        responsTourDto.setAdultPrice(tour.getAdultPrice());
-        responsTourDto.setChildPrice(tour.getChildPrice());
-        responsTourDto.setReturnDay(tour.getReturnDay());
-        responsTourDto.setStartDay(tour.getStartDay());
-        responsTourDto.setAdultSeatsNumber(tour.getAdultSeatsNumber());
-        responsTourDto.setChildSeatsNumber(tour.getChildSeatsNumber());
+        ResponseTourDto responseTourDto = new ResponseTourDto();
+        responseTourDto.setId(tour.getId());
+        responseTourDto.setCity(tour.getCity());
+        responseTourDto.setHotel(tour.getHotel());
+        responseTourDto.setAdultPrice(tour.getAdultPrice());
+        responseTourDto.setChildPrice(tour.getChildPrice());
+        responseTourDto.setReturnDay(tour.getReturnDay());
+        responseTourDto.setStartDay(tour.getStartDay());
+        responseTourDto.setAdultSeatsNumber(tour.getAdultSeatsNumber());
+        responseTourDto.setChildSeatsNumber(tour.getChildSeatsNumber());
+        responseTourDto.setCategoryName(String.valueOf(tour.getCategory().getType()));
 
-        return responsTourDto;
+       List<Review> listReview =  tour.getListOfReview();
+       if (listReview != null) {
+           responseTourDto.setListOfReview(listReview.stream()
+                   .map(r -> mapperReview.mapToRespons(r))
+                   .toList());
+       }else{
+           responseTourDto.setListOfReview(Collections.emptyList());
+       }
+
+        return responseTourDto;
     }
 }

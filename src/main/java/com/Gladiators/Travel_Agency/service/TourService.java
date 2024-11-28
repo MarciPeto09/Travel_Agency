@@ -4,7 +4,11 @@ package com.Gladiators.Travel_Agency.service;
 import com.Gladiators.Travel_Agency.dto.RequestTourDto;
 import com.Gladiators.Travel_Agency.dto.ResponseTourDto;
 import com.Gladiators.Travel_Agency.mapper.MapperTour;
+import com.Gladiators.Travel_Agency.model.Category;
+import com.Gladiators.Travel_Agency.model.Review;
 import com.Gladiators.Travel_Agency.model.Tour;
+import com.Gladiators.Travel_Agency.repository.CategoryRepo;
+import com.Gladiators.Travel_Agency.repository.ReviewRepo;
 import com.Gladiators.Travel_Agency.repository.TourRepository;
 import jakarta.annotation.Nullable;
 import lombok.AllArgsConstructor;
@@ -13,21 +17,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
 
 @Service
-@NoArgsConstructor
+@AllArgsConstructor
 public class TourService {
 
 
     private TourRepository tourRepo;
     private MapperTour mapper;
+    private CategoryRepo categoryRepo;
+    private ReviewRepo reviewRepo;
 
-    @Autowired
-    public TourService(TourRepository tourRepo, MapperTour mapper) {
-        this.tourRepo = tourRepo;
-        this.mapper = mapper;
-    }
 
 
     public List<ResponseTourDto> findAll(){
@@ -54,7 +56,11 @@ public class TourService {
     }
 
     public ResponseTourDto save(RequestTourDto request) {
+        Category categoryExist = categoryRepo.findById(request.getCategoryId())
+                .orElseThrow(() -> new RuntimeException("Category not found!"));
+
         Tour tour = mapper.mapToEntity(request);
+        tour.setCategory(categoryExist);
 
         Tour savedTour = tourRepo.save(tour);
 
@@ -78,5 +84,33 @@ public class TourService {
                     .map(t -> mapper.mapToResponse(t))
                     .toList();
     }
+
+
+
+    public ResponseTourDto update(RequestTourDto requestTourDto, Long id){
+        Tour existingTour = tourRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("There is no tour with this id"));
+
+        Category categoryExist = categoryRepo.findById(requestTourDto.getCategoryId())
+                .orElseThrow(() -> new RuntimeException("There is no category with this id"));
+
+        existingTour.setCategory(categoryExist);
+        existingTour.setCity(requestTourDto.getCity());
+        existingTour.setHotel(requestTourDto.getHotel());
+        existingTour.setChildPrice(requestTourDto.getChildPrice());
+        existingTour.setAdultPrice(requestTourDto.getAdultPrice());
+        existingTour.setAdultSeatsNumber(requestTourDto.getAdultSeatsNumber());
+        existingTour.setChildSeatsNumber(requestTourDto.getChildSeatsNumber());
+        existingTour.setStartDay(requestTourDto.getStartDay());
+        existingTour.setReturnDay(requestTourDto.getReturnDay());
+
+        Tour savedTours = tourRepo.save(existingTour);
+
+        return mapper.mapToResponse(savedTours);
+
+
+    }
+
+
 
 }

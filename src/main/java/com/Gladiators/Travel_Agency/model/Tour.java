@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -28,5 +29,11 @@ public class Tour {
     private String hotel;
 
 
+   @ManyToOne(fetch = FetchType.EAGER)
+   @JoinColumn(name = "category_Id", nullable = false)
+    Category category;
 
+
+   @OneToMany(mappedBy = "tour", cascade = CascadeType.ALL, orphanRemoval = true)
+   List<Review> listOfReview;
 }

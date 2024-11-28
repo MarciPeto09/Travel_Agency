@@ -35,4 +35,6 @@ public interface TourRepository extends JpaRepository<Tour, Long> {
             @Param("adultSeatsNumber") Integer adultSeatsNumber,
             @Param("childSeatsNumber") Integer childSeatsNumber,
             @Param("hotel") String hotel);
+
+
 }

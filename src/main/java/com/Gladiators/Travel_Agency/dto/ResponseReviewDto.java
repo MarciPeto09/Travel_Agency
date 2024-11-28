@@ -17,4 +17,6 @@ public class ResponseReviewDto {
     private String description;
     private LocalDateTime Data;
     private Integer Number;
+
+    private Long tourId;
 }
