@@ -33,27 +33,27 @@ public class MapperTour {
 
 
     public ResponseTourDto mapToResponse (Tour tour){
-        ResponseTourDto responsTourDto = new ResponseTourDto();
-        responsTourDto.setId(tour.getId());
-        responsTourDto.setCity(tour.getCity());
-        responsTourDto.setHotel(tour.getHotel());
-        responsTourDto.setAdultPrice(tour.getAdultPrice());
-        responsTourDto.setChildPrice(tour.getChildPrice());
-        responsTourDto.setReturnDay(tour.getReturnDay());
-        responsTourDto.setStartDay(tour.getStartDay());
-        responsTourDto.setAdultSeatsNumber(tour.getAdultSeatsNumber());
-        responsTourDto.setChildSeatsNumber(tour.getChildSeatsNumber());
-        responsTourDto.setCategoryName(String.valueOf(tour.getCategory().getType()));
+        ResponseTourDto responseTourDto = new ResponseTourDto();
+        responseTourDto.setId(tour.getId());
+        responseTourDto.setCity(tour.getCity());
+        responseTourDto.setHotel(tour.getHotel());
+        responseTourDto.setAdultPrice(tour.getAdultPrice());
+        responseTourDto.setChildPrice(tour.getChildPrice());
+        responseTourDto.setReturnDay(tour.getReturnDay());
+        responseTourDto.setStartDay(tour.getStartDay());
+        responseTourDto.setAdultSeatsNumber(tour.getAdultSeatsNumber());
+        responseTourDto.setChildSeatsNumber(tour.getChildSeatsNumber());
+        responseTourDto.setCategoryName(String.valueOf(tour.getCategory().getType()));
 
        List<Review> listReview =  tour.getListOfReview();
        if (listReview != null) {
-           responsTourDto.setListOfReview(listReview.stream()
+           responseTourDto.setListOfReview(listReview.stream()
                    .map(r -> mapperReview.mapToRespons(r))
                    .toList());
        }else{
-           responsTourDto.setListOfReview(Collections.emptyList());
+           responseTourDto.setListOfReview(Collections.emptyList());
        }
 
-        return responsTourDto;
+        return responseTourDto;
     }
 }
