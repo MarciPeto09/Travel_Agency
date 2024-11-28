@@ -9,7 +9,10 @@ import com.Gladiators.Travel_Agency.model.User;
 import com.Gladiators.Travel_Agency.repository.UserRepository;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -17,8 +20,9 @@ import java.util.List;
 @NoArgsConstructor
 public class UserService {
 
-    UserRepository userRepository;
-    MapperUser mapperUser;
+   private  UserRepository userRepository;
+   private MapperUser mapperUser;
+
 
 
     @Autowired
@@ -54,6 +58,15 @@ public class UserService {
         List<User> listUser = userRepository.findAll();
         return listUser.stream().map(t -> mapperUser.mapToResponse(t))
                 .toList();
+    }
+
+//method to be used for security impl
+    @Transactional
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + username));
+
+        return UserDetailsImpl.build(user);
     }
 
 }
