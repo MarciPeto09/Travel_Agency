@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,14 +22,21 @@ import java.util.List;
 @AllArgsConstructor
 public class UserService implements UserDetailsService {
 
-   private  UserRepository userRepository;
-   private MapperUser mapperUser;
+   private final  UserRepository userRepository;
+   private final MapperUser mapperUser;
+//   private final BCryptPasswordEncoder passwordEncoder;
 
 
 
     public ResponseUserDto save(RequestUserDto request) {
+
+//        String encodedPassword = passwordEncoder.encode(request.getPassword());
+
         User user = mapperUser.mapToEntity(request);
+//        user.setPassword(encodedPassword);
+
         User savedUser = userRepository.save(user);
+
         return mapperUser.mapToResponse(savedUser);
 
     }
