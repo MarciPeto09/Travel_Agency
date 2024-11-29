@@ -5,16 +5,13 @@ import com.Gladiators.Travel_Agency.dto.ResponseUserDto;
 import com.Gladiators.Travel_Agency.model.User;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 
 @Component
 public class MapperUser {
 
     public User mapToEntity(RequestUserDto requestUserDto) {
         return  User.builder()
-                .name(requestUserDto.getName())
+                .username(requestUserDto.getName())
                 .surname(requestUserDto.getSurname())
                 .email(requestUserDto.getEmail())
                 .password(requestUserDto.getPassword())
@@ -29,7 +26,7 @@ public class MapperUser {
 
         return ResponseUserDto.builder()
                 .id(user.getId())
-                .name(user.getName())
+                .name(user.getUsername())
                 .roles(user.getRoles())
                 .age(user.getAge())
                 .email(user.getEmail())

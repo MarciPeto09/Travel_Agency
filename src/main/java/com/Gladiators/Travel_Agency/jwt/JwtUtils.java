@@ -31,8 +31,7 @@ public class JwtUtils {
     }
 
 
-
-    public String generateJwtToken(Authentication authentication){
+    public String generateJwtToken(Authentication authentication) {
 
         UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
 

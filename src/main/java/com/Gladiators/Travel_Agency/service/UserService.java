@@ -10,6 +10,7 @@ import com.Gladiators.Travel_Agency.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +19,7 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class UserService {
+public class UserService implements UserDetailsService {
 
    private  UserRepository userRepository;
    private MapperUser mapperUser;
@@ -52,13 +53,14 @@ public class UserService {
                 .toList();
     }
 
-//method to be used for security impl
-    @Transactional
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + username));
 
-        return UserDetailsImpl.build(user);
-    }
+@Transactional
+public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    System.out.println("Looking for user with username: " + username);
+    User user = userRepository.findByUsername(username)
+            .orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + username));
+
+    return UserDetailsImpl.build(user);
+}
 
 }

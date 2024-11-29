@@ -2,7 +2,6 @@ package com.Gladiators.Travel_Agency.config;
 
 import com.Gladiators.Travel_Agency.jwt.AuthEntryPointJwt;
 import com.Gladiators.Travel_Agency.jwt.AuthTokenFilter;
-import com.Gladiators.Travel_Agency.service.UserDetailsImpl;
 import com.Gladiators.Travel_Agency.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -73,15 +72,18 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
-                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-                .csrf(AbstractHttpConfigurer::disable)
-                .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(auth ->
-                        auth.requestMatchers("/api/signin/**").permitAll()
-                                .anyRequest().authenticated()
-                ).authenticationProvider(authenticationProvider())
-                .addFilterBefore(authenticationJwtTokenFilter(),
-                        UsernamePasswordAuthenticationFilter.class).build();
+                .cors(cors -> cors.configurationSource(corsConfigurationSource())) // CORS configuration
+                .csrf(AbstractHttpConfigurer::disable) // Disable CSRF for stateless authentication
+                .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler)) // Handle unauthenticated requests
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // Stateless authentication
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/api/signin/**").permitAll()
+                        .requestMatchers("/api/role").hasRole("ADMIN")
+                        .anyRequest().authenticated()
+                )
+                .authenticationProvider(authenticationProvider()) // Use custom authentication provider
+                .addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class) // Add JWT filter
+                .build();
     }
+
 }
