@@ -1,15 +1,17 @@
 package com.Gladiators.Travel_Agency.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.Gladiators.Travel_Agency.model.User;
+import lombok.*;
+
+import java.util.List;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class ResponseRoleDto {
     private Long id;
     private String roleType;
+    private List<User> users;
 }

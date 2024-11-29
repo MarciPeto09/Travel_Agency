@@ -21,7 +21,7 @@ public class UserDetailsImpl implements UserDetails {
     private Collection<? extends GrantedAuthority> authorities;
 
     public static UserDetailsImpl build(User user) {
-        List<GrantedAuthority> authoritiesList = List.of(new SimpleGrantedAuthority(user.getRole().getRoleType()));
+        List<GrantedAuthority> authoritiesList = List.of(new SimpleGrantedAuthority(user.getRoles().toString()));
 
         return new UserDetailsImpl(
                 user.getId(),

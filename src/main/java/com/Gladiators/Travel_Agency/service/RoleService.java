@@ -6,24 +6,18 @@ import com.Gladiators.Travel_Agency.dto.ResponseRoleDto;
 import com.Gladiators.Travel_Agency.mapper.MapperRole;
 import com.Gladiators.Travel_Agency.model.Role;
 import com.Gladiators.Travel_Agency.repository.RoleRepository;
+import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-@NoArgsConstructor
+@AllArgsConstructor
 public class RoleService {
 
-    RoleRepository roleRepository;
-    MapperRole mapperRole;
-
-    public RoleService(MapperRole mapperRole, RoleRepository roleRepository) {
-        this.mapperRole = mapperRole;
-        this.roleRepository = roleRepository;
-    }
-
-
+    private RoleRepository roleRepository;
+    private MapperRole mapperRole;
 
     public ResponseRoleDto getRoleById(Long id) {
         Role role = roleRepository.findById(id)
@@ -32,7 +26,7 @@ public class RoleService {
     }
 
 
-    public List<ResponseRoleDto> findAll(){
+    public List<ResponseRoleDto> findAll() {
         List<Role> listRole = roleRepository.findAll();
         return listRole.stream().map(t -> mapperRole.mapToResponse(t))
                 .toList();

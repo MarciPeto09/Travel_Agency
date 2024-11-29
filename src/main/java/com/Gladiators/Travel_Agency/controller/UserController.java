@@ -16,7 +16,7 @@ import java.util.List;
 
 
 @ResponseBody
-@RequestMapping("api/users")
+@RequestMapping("api/user")
 @NoArgsConstructor
 @Controller
 public class UserController {

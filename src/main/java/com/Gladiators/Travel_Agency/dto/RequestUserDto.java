@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -15,6 +17,7 @@ public class RequestUserDto {
         private String surname;
         private String email;
         private Integer age;
-        private Role role;
+        private String password;
+        private List<Role> roles;
     }
 

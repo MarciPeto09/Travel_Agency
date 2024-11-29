@@ -1,7 +1,10 @@
 package com.Gladiators.Travel_Agency.model;
 
+
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 
 @Entity
@@ -21,6 +24,13 @@ public class User {
     private String email;
     private Integer age;
     private String password;
-    private Role role;
+
+    @ManyToMany
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private List<Role> roles;
 
 }

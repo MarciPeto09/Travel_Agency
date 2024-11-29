@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @ResponseBody
-@RequestMapping("api/roles")
+@RequestMapping("api/role")
 @NoArgsConstructor
 @Controller
 public class RoleController {

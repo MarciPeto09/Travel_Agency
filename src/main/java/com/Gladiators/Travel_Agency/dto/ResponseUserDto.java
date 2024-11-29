@@ -1,20 +1,22 @@
 package com.Gladiators.Travel_Agency.dto;
 
 import com.Gladiators.Travel_Agency.model.Role;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+
+import java.util.List;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class ResponseUserDto {
+
     private Long id;
     private String name;
     private String surname;
     private String email;
     private Integer age;
-    private Role role;
+    private String password;
+    private List<Role> roles;
 }

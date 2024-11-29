@@ -1,7 +1,11 @@
 package com.Gladiators.Travel_Agency.model;
 
+
+
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 
 @Entity
@@ -9,7 +13,7 @@ import lombok.*;
 @AllArgsConstructor
 @Getter
 @Setter
-@Table(name="Roles")
+@Table(name="roles")
 @Builder
 public class Role {
     @Id
@@ -17,4 +21,7 @@ public class Role {
     private Long id;
 
     private String roleType;
+
+    @ManyToMany(mappedBy = "roles")
+    private List<User> users;
 }

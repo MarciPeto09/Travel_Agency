@@ -7,19 +7,21 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class MapperRole {
-     public Role mapToEntity(RequestRoleDto requestRoleDto){
-         Role roleEntity = Role.builder()
-                 .roleType(requestRoleDto.getRoleType())
-                 .build();
-         return roleEntity;
-     }
 
-     public ResponseRoleDto mapToResponse (Role role){
-         ResponseRoleDto responseRoleDto = new ResponseRoleDto();
-         responseRoleDto.setId(role.getId());
-         responseRoleDto.setRoleType(role.getRoleType());
+    public Role mapToEntity(RequestRoleDto requestRoleDto){
+        return Role.builder()
+                .roleType(requestRoleDto.getRoleType())
+                .users(requestRoleDto.getUsers())
+                .build();
+    }
 
-         return responseRoleDto ;
-     }
+    public ResponseRoleDto mapToResponse (Role role){
+        return   ResponseRoleDto.builder()
+                .id(role.getId())
+                .roleType(role.getRoleType())
+                .users(role.getUsers())
+                .build();
+
+    }
 
 }

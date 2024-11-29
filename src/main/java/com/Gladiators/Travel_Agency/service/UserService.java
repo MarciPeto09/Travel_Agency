@@ -7,7 +7,7 @@ import com.Gladiators.Travel_Agency.mapper.MapperUser;
 import com.Gladiators.Travel_Agency.model.Tour;
 import com.Gladiators.Travel_Agency.model.User;
 import com.Gladiators.Travel_Agency.repository.UserRepository;
-import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -17,19 +17,11 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-@NoArgsConstructor
+@AllArgsConstructor
 public class UserService {
 
    private  UserRepository userRepository;
    private MapperUser mapperUser;
-
-
-
-    @Autowired
-    public UserService(MapperUser mapperUser, UserRepository userRepository) {
-        this.mapperUser = mapperUser;
-        this.userRepository = userRepository;
-    }
 
 
 

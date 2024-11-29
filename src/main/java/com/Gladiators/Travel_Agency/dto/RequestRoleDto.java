@@ -1,9 +1,12 @@
 package com.Gladiators.Travel_Agency.dto;
 
+import com.Gladiators.Travel_Agency.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -11,4 +14,5 @@ import lombok.Setter;
 @AllArgsConstructor
 public class RequestRoleDto {
     private String roleType;
+    private List<User> users;
 }
