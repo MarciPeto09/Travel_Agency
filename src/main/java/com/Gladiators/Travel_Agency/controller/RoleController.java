@@ -6,6 +6,7 @@ import com.Gladiators.Travel_Agency.dto.ResponseRoleDto;
 import com.Gladiators.Travel_Agency.dto.ResponseUserDto;
 import com.Gladiators.Travel_Agency.service.RoleService;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -15,10 +16,10 @@ import java.util.List;
 
 @ResponseBody
 @RequestMapping("api/role")
-@NoArgsConstructor
 @Controller
 public class RoleController {
 
+    @Autowired
     private RoleService roleService;
 
     @GetMapping("/findAll")

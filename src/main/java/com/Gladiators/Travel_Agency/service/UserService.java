@@ -1,14 +1,11 @@
 package com.Gladiators.Travel_Agency.service;
 
 import com.Gladiators.Travel_Agency.dto.RequestUserDto;
-import com.Gladiators.Travel_Agency.dto.ResponseTourDto;
 import com.Gladiators.Travel_Agency.dto.ResponseUserDto;
 import com.Gladiators.Travel_Agency.mapper.MapperUser;
-import com.Gladiators.Travel_Agency.model.Tour;
-import com.Gladiators.Travel_Agency.model.User;
+import com.Gladiators.Travel_Agency.model.Users;
 import com.Gladiators.Travel_Agency.repository.UserRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -29,10 +26,10 @@ public class UserService implements UserDetailsService {
 
 
     public ResponseUserDto save(RequestUserDto request) {
-//        String encodedPassword = passwordEncoder.encode(request.getPassword());
-        User user = mapperUser.mapToEntity(request);
-//        user.setPassword(encodedPassword);
-        User savedUser = userRepository.save(user);
+        String encodedPassword = passwordEncoder.encode(request.getPassword());
+        Users user = mapperUser.mapToEntity(request);
+        user.setPassword(encodedPassword);
+        Users savedUser = userRepository.save(user);
         return mapperUser.mapToResponse(savedUser);
     }
 
@@ -43,7 +40,7 @@ public class UserService implements UserDetailsService {
 
 
     public ResponseUserDto getUserById(Long id) {
-        User user = userRepository.findById(id)
+        Users user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found"));
         return mapperUser.mapToResponse(user);
     }
@@ -51,7 +48,7 @@ public class UserService implements UserDetailsService {
 
 
     public List<ResponseUserDto> findAll(){
-        List<User> listUser = userRepository.findAll();
+        List<Users> listUser = userRepository.findAll();
         return listUser.stream().map(t -> mapperUser.mapToResponse(t))
                 .toList();
     }
@@ -60,7 +57,7 @@ public class UserService implements UserDetailsService {
 @Transactional
 public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
     System.out.println("Looking for user with username: " + username);
-    User user = userRepository.findByUsername(username)
+    Users user = userRepository.findByUsername(username)
             .orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + username));
 
     return UserDetailsImpl.build(user);

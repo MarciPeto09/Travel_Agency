@@ -2,16 +2,16 @@ package com.Gladiators.Travel_Agency.mapper;
 
 import com.Gladiators.Travel_Agency.dto.RequestUserDto;
 import com.Gladiators.Travel_Agency.dto.ResponseUserDto;
-import com.Gladiators.Travel_Agency.model.User;
+import com.Gladiators.Travel_Agency.model.Users;
 import org.springframework.stereotype.Component;
 
 
 @Component
 public class MapperUser {
 
-    public User mapToEntity(RequestUserDto requestUserDto) {
-        return  User.builder()
-                .username(requestUserDto.getName())
+    public Users mapToEntity(RequestUserDto requestUserDto) {
+        return  Users.builder()
+                .username(requestUserDto.getUsername())
                 .surname(requestUserDto.getSurname())
                 .email(requestUserDto.getEmail())
                 .password(requestUserDto.getPassword())
@@ -22,7 +22,7 @@ public class MapperUser {
 
 
 
-    public ResponseUserDto mapToResponse (User user) {
+    public ResponseUserDto mapToResponse (Users user) {
 
         return ResponseUserDto.builder()
                 .id(user.getId())

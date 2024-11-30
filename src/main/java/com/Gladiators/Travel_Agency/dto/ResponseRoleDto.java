@@ -1,6 +1,6 @@
 package com.Gladiators.Travel_Agency.dto;
 
-import com.Gladiators.Travel_Agency.model.User;
+import com.Gladiators.Travel_Agency.model.Users;
 import lombok.*;
 
 import java.util.List;
@@ -13,5 +13,5 @@ import java.util.List;
 public class ResponseRoleDto {
     private Long id;
     private String roleType;
-    private List<User> users;
+    private List<Users> users;
 }

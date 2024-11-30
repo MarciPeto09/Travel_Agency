@@ -1,6 +1,6 @@
 package com.Gladiators.Travel_Agency.dto;
 
-import com.Gladiators.Travel_Agency.model.User;
+import com.Gladiators.Travel_Agency.model.Users;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,5 +14,5 @@ import java.util.List;
 @AllArgsConstructor
 public class RequestRoleDto {
     private String roleType;
-    private List<User> users;
+    private List<Users> users;
 }

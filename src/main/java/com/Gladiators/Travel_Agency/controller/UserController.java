@@ -6,6 +6,7 @@ import com.Gladiators.Travel_Agency.dto.ResponseTourDto;
 import com.Gladiators.Travel_Agency.dto.ResponseUserDto;
 import com.Gladiators.Travel_Agency.service.UserService;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.liquibase.LiquibaseProperties;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,9 +18,10 @@ import java.util.List;
 
 @ResponseBody
 @RequestMapping("api/user")
-@NoArgsConstructor
 @Controller
 public class UserController {
+
+    @Autowired
     private UserService userService;
 
     @GetMapping("/findAll")
@@ -29,6 +31,7 @@ public class UserController {
 
     @PostMapping("/save")
     public ResponseEntity<ResponseUserDto> save(@RequestBody RequestUserDto requestUserDto){
-        return new ResponseEntity<>(userService.save(requestUserDto), HttpStatus.CREATED);
+        ResponseUserDto response = userService.save(requestUserDto);
+        return ResponseEntity.ok(response);
     }
 }

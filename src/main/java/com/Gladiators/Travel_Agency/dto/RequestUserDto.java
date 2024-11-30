@@ -13,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RequestUserDto {
-        private String name;
+        private String username;
         private String surname;
         private String email;
         private Integer age;

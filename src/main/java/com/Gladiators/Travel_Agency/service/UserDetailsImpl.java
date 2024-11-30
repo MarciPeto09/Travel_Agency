@@ -1,6 +1,6 @@
 package com.Gladiators.Travel_Agency.service;
 
-import com.Gladiators.Travel_Agency.model.User;
+import com.Gladiators.Travel_Agency.model.Users;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,7 +22,7 @@ public class UserDetailsImpl implements UserDetails {
     private String password;
     private Collection<? extends GrantedAuthority> authorities;
 
-    public static UserDetailsImpl build(User user) {
+    public static UserDetailsImpl build(Users user) {
         List<GrantedAuthority> authoritiesList = user.getRoles().stream()
                 .map(role -> new SimpleGrantedAuthority(role.getRoleType()))
                 .collect(Collectors.toList());
