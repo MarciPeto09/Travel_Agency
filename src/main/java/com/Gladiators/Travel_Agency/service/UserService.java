@@ -24,21 +24,16 @@ public class UserService implements UserDetailsService {
 
    private final  UserRepository userRepository;
    private final MapperUser mapperUser;
-//   private final BCryptPasswordEncoder passwordEncoder;
+    private final BCryptPasswordEncoder passwordEncoder;
 
 
 
     public ResponseUserDto save(RequestUserDto request) {
-
 //        String encodedPassword = passwordEncoder.encode(request.getPassword());
-
         User user = mapperUser.mapToEntity(request);
 //        user.setPassword(encodedPassword);
-
         User savedUser = userRepository.save(user);
-
         return mapperUser.mapToResponse(savedUser);
-
     }
 
 
