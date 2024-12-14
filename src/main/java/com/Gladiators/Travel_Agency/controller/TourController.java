@@ -6,6 +6,7 @@ import com.Gladiators.Travel_Agency.service.TourService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +21,7 @@ public class TourController {
 
     private TourService tourService;
 
-
+    @PreAuthorize("hasRole('MANAGER')")
     @PostMapping("/save")
     public ResponseEntity<ResponseTourDto> save(@RequestBody RequestTourDto requestTourDto){
         return new ResponseEntity<>(tourService.save(requestTourDto),HttpStatus.CREATED);
